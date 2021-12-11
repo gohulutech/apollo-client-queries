@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { render } from "react-dom";
 
+import { Dogs } from "./components/Dogs";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import { DogPhoto } from "./components/DogPhoto";
 
 const client = new ApolloClient({
   uri: "https://71z1g.sse.codesandbox.io/",
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
 });
 
 function App() {
@@ -18,8 +20,12 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <div>
-        <h2>Building Query components 🚀</h2>
+        <h2>
+          Building Query components <span role="img">🚀</span>
+        </h2>
       </div>
+      <Dogs onDogSelected={onDogSelected} />
+      {selectedDog != null && <DogPhoto breed={selectedDog} />}
     </ApolloProvider>
   );
 }
